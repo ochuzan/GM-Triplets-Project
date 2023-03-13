@@ -7,7 +7,7 @@ export const fetchData = (subject: string, numberOfQuestions: string) => {
         headers: {
           'Content-Type': 'application/json',
           //API KEY:
-          'Authorization': "Bearer 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"
+          'Authorization': "Bearer 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"
         },
         body: JSON.stringify({
           'model': 'gpt-3.5-turbo',
@@ -17,7 +17,7 @@ export const fetchData = (subject: string, numberOfQuestions: string) => {
                 'content': `Please give me a list of ${parseInt(numberOfQuestions)} ${subject} questions and their answers.`
             }
         ],
-          'n': numberOfQuestions,
+          'n': parseInt(numberOfQuestions),
           'temperature': 0.5,
           'top_p': 1,
           'frequency_penalty': 0,
