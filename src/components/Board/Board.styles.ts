@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const BoardContainer = styled.div`
   padding: 0 5%;
@@ -23,4 +23,5 @@ export const GameCard = styled.div`
   width: 30%;
   min-width: 150px;
   background-color: black;
-`
+  border-radius: 15px;
+`;
