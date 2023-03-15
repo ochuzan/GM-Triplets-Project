@@ -20,6 +20,7 @@ const customStyles = {
     },
 };
 
+
 const QuestionAnswerModal = () => {
     const [flip, setFlip] = useState(true);
     const [modalIsOpen, setIsOpen] = React.useState(false);
