@@ -3,49 +3,72 @@ import React, { useEffect, useState } from 'react';
 import Board from './components/Board/Board';
 import Scoreboard from './components/Scoreboard/Scoreboard';
 import { createContext, useContext } from 'react';
-import { WelcomeModalWrapper } from './WelcomeModal/WelcomeModal.styles';
 import { fetchData } from './utils';
 import QuestionAnswerModal from './components/QuestionAnswerModal/QuestionAnswerModal';
 import { TriviaObj, triviaArr } from './dummydata';
 import EndGameModal from './components/EndGameModal/EndGameModal';
+import WelcomeModal from './components/WelcomeModal/WelcomeModal';
 
 export interface State {
   isWelcomeModalOpen: boolean;
-  setIsWelcomeModalOpen: any;
-  triviaArr: TriviaObj[];
-  curQuestion: null | TriviaObj;
-  setCurQuestion: any;
-  setTriviaArr: any;
+  setIsWelcomeModalOpen: (boolean: boolean) => void;
+  triviaArr: [];
+  curQuestion: TriviaObj | null;
+  setCurQuestion: (question: TriviaObj) => void;
+  numberOfQuestions: string;
+  setNumberOfQuestions: (num: string) => void;
+  subject: string;
+  setSubject: (subject: string) => void,
+  teamOne: string;
+  setTeamOne: (teamOne: string) => void,
+  teamTwo: string;
+  setTeamTwo: (teamTwo: string) => void,
 }
 
 export const AppContext = createContext<State>({
   isWelcomeModalOpen: true,
-  setIsWelcomeModalOpen: null,
-  triviaArr: triviaArr,
+  setIsWelcomeModalOpen: (boolean: boolean) => null,
+  triviaArr: [],
   curQuestion: null,
-  setCurQuestion: null,
-  setTriviaArr: null
+  setCurQuestion: (question: TriviaObj) => null,
+  numberOfQuestions: "0",
+  setNumberOfQuestions: (num: string) => null,
+  subject: "",
+  setSubject: (subject: string) => null,
+  teamOne: "",
+  setTeamOne: (teamOne: string) => null,
+  teamTwo: "",
+  setTeamTwo: (teamTwo: string) => null,
 })
 
 function App() {
-  const [isWelcomeModalOpen, setIsWelcomeModalOpen] = useState(true);
+  const [isWelcomeModalOpen, setIsWelcomeModalOpen] = useState<boolean>(true);
+  const [isOpenQuestionModal, setIsOpenQuestionModal] = useState(false);
   const [curQuestion, setCurQuestion] = useState(null);
-  const [triviaList, setTriviaArr] = useState(triviaArr);
-  const [countClicked, setCountClicked] = useState(0);
-  // const handleCloseModal = () => setIsWelcomeModalOpen(false);
+  const [triviaArr, setTriviaArr] = useState([]);
+  const [numberOfQuestions, setNumberOfQuestions] = useState<number>(0);
+  const [subject, setSubject] = useState<string>("");
+  const [teamOne, setTeamOne] = useState<string>("");
+  const [teamTwo, setTeamTwo] = useState<string>("");
 
-  // fetchData("Chemistry", "1");
+  
+  useEffect(() => {
+
+  }, [curQuestion])
+
+  console.log(curQuestion)
 
   return (
     <AppContext.Provider value={{
-      isWelcomeModalOpen: isWelcomeModalOpen,
-      setIsWelcomeModalOpen: setIsWelcomeModalOpen,
-      triviaArr: triviaList,
+      isWelcomeModalOpen,
+      setIsWelcomeModalOpen,
+      triviaArr: triviaArr,
       curQuestion: curQuestion,
       setCurQuestion: setCurQuestion,
       setTriviaArr: setTriviaArr
     }}>
       <div className="App">
+        <WelcomeModal></WelcomeModal>
         <Board />
         <QuestionAnswerModal isOpen={curQuestion !== null} countClicked={countClicked} setCountClicked={setCountClicked} />
         <EndGameModal />
@@ -54,7 +77,5 @@ function App() {
     </AppContext.Provider>
   );
 }
-
-
 
 export default App;
