@@ -5,14 +5,16 @@ import Scoreboard from './components/Scoreboard/Scoreboard';
 import { createContext, useContext } from 'react';
 import { fetchData } from './utils';
 import QuestionAnswerModal from './components/QuestionAnswerModal/QuestionAnswerModal';
+import { TriviaObj, triviaArr } from './dummydata';
+import EndGameModal from './components/EndGameModal/EndGameModal';
 import WelcomeModal from './components/WelcomeModal/WelcomeModal';
 
 export interface State {
   isWelcomeModalOpen: boolean;
   setIsWelcomeModalOpen: (boolean: boolean) => void;
   triviaArr: [];
-  curQuestion: string | null;
-  setCurQuestion: (question: string) => void;
+  curQuestion: TriviaObj | null;
+  setCurQuestion: (question: TriviaObj) => void;
   numberOfQuestions: string;
   setNumberOfQuestions: (num: string) => void;
   subject: string;
@@ -28,7 +30,7 @@ export const AppContext = createContext<State>({
   setIsWelcomeModalOpen: (boolean: boolean) => null,
   triviaArr: [],
   curQuestion: null,
-  setCurQuestion: (question: string) => null,
+  setCurQuestion: (question: TriviaObj) => null,
   numberOfQuestions: "0",
   setNumberOfQuestions: (num: string) => null,
   subject: "",
@@ -62,12 +64,14 @@ function App() {
       setIsWelcomeModalOpen,
       triviaArr: triviaArr,
       curQuestion: curQuestion,
-      setCurQuestion: setCurQuestion
+      setCurQuestion: setCurQuestion,
+      setTriviaArr: setTriviaArr
     }}>
       <div className="App">
         <WelcomeModal></WelcomeModal>
         <Board />
-        <QuestionAnswerModal isOpen={curQuestion !== null} />
+        <QuestionAnswerModal isOpen={curQuestion !== null} countClicked={countClicked} setCountClicked={setCountClicked} />
+        <EndGameModal />
         <Scoreboard />
       </div>
     </AppContext.Provider>
