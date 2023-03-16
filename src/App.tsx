@@ -14,6 +14,10 @@ export interface State {
   triviaArr: TriviaObj[];
   curQuestion: null | TriviaObj;
   setCurQuestion: any;
+  playerOneScore: number;
+  setPlayerOneScore: (playerOneScore: number) => void,
+  playerTwoScore: number;
+  setPlayerTwoScore:(playerTwoScore: number) => void,
 }
 
 export const AppContext = createContext<State>({
@@ -21,13 +25,19 @@ export const AppContext = createContext<State>({
   setIsWelcomeModalOpen: null,
   triviaArr: triviaArr,
   curQuestion: null,
-  setCurQuestion: null
+  setCurQuestion: null,
+  playerOneScore: 0,
+  setPlayerOneScore: (playerOneScore) => null,
+  playerTwoScore: 0,
+  setPlayerTwoScore:(playerTwoScore) => null,
 })
 
 function App() {
   const [isWelcomeModalOpen, setIsWelcomeModalOpen] = useState(true);
   const [isOpenQuestionModal, setIsOpenQuestionModal] = useState(false);
   const [curQuestion, setCurQuestion] = useState(null);
+  const [ playerOneScore, setPlayerOneScore ] = useState<number>(0);
+  const [ playerTwoScore, setPlayerTwoScore ] = useState<number>(0);
   // const handleCloseModal = () => setIsWelcomeModalOpen(false);
 
   // fetchData("Chemistry", "1");
@@ -42,7 +52,11 @@ function App() {
       setIsWelcomeModalOpen: setIsWelcomeModalOpen,
       triviaArr: triviaArr,
       curQuestion: curQuestion,
-      setCurQuestion: setCurQuestion
+      setCurQuestion: setCurQuestion,
+      playerOneScore: playerOneScore,
+      setPlayerOneScore: setPlayerOneScore,
+      playerTwoScore: playerTwoScore,
+      setPlayerTwoScore: setPlayerTwoScore,
     }}>
       <div className="App">
         <Board />

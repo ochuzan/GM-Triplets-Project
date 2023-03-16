@@ -4,6 +4,8 @@ import QuestionCard from '../QuestionCard/QuestionCard';
 import ReactCardFlip from "react-card-flip";
 import AnswerCard from '../AnswerCard/AnswerCard';
 import { AppContext, State } from '../../App';
+import Scoreboard from '../Scoreboard/Scoreboard';
+import ScoreboardButtons from '../ScoreboardButtons/ScoreboardButtons';
 
 const customStyles = {
     content: {
@@ -18,7 +20,7 @@ const customStyles = {
 
 
 const QuestionAnswerModal = ({ isOpen }: { isOpen: boolean }) => {
-    const [flip, setFlip] = useState(true);
+    const [flip, setFlip] = useState(false);
     const state: State = useContext(AppContext)
 
     return (
@@ -38,6 +40,8 @@ const QuestionAnswerModal = ({ isOpen }: { isOpen: boolean }) => {
                 <div>
                     <AnswerCard answer={state.curQuestion?.answer} />
                     <button onClick={() => setFlip(!flip)}>Switch</button>
+                    <Scoreboard/>
+                    <ScoreboardButtons/>
                 </div>
             </ReactCardFlip>
         </Modal>

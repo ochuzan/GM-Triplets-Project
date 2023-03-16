@@ -1,10 +1,16 @@
-# Getting Started with Create React App
+# GM Triplets Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Contributors:
+
+- Ikenna
+- Oliver
+- Sarah
 
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm install`
 
 ### `npm start`
 

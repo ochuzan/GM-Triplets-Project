@@ -23,9 +23,3 @@ export const PlayerScore = styled.div`
   background-color: black;
   color: white;
 `;
-
-export const ScoreButton = styled.button`
-  background-color: black;
-  color: white;
-  border-radius: 25px;
-`;
