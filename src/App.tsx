@@ -7,6 +7,7 @@ import { WelcomeModalWrapper } from './WelcomeModal/WelcomeModal.styles';
 import { fetchData } from './utils';
 import QuestionAnswerModal from './components/QuestionAnswerModal/QuestionAnswerModal';
 import { TriviaObj, triviaArr } from './dummydata';
+import EndGameModal from './components/EndGameModal/EndGameModal';
 
 export interface State {
   isWelcomeModalOpen: boolean;
@@ -14,6 +15,7 @@ export interface State {
   triviaArr: TriviaObj[];
   curQuestion: null | TriviaObj;
   setCurQuestion: any;
+  setTriviaArr: any;
 }
 
 export const AppContext = createContext<State>({
@@ -21,32 +23,32 @@ export const AppContext = createContext<State>({
   setIsWelcomeModalOpen: null,
   triviaArr: triviaArr,
   curQuestion: null,
-  setCurQuestion: null
+  setCurQuestion: null,
+  setTriviaArr: null
 })
 
 function App() {
   const [isWelcomeModalOpen, setIsWelcomeModalOpen] = useState(true);
-  const [isOpenQuestionModal, setIsOpenQuestionModal] = useState(false);
   const [curQuestion, setCurQuestion] = useState(null);
+  const [triviaList, setTriviaArr] = useState(triviaArr);
+  const [countClicked, setCountClicked] = useState(0);
   // const handleCloseModal = () => setIsWelcomeModalOpen(false);
 
   // fetchData("Chemistry", "1");
-  useEffect(() => {
-
-  }, [curQuestion])
-  console.log(curQuestion)
 
   return (
     <AppContext.Provider value={{
       isWelcomeModalOpen: isWelcomeModalOpen,
       setIsWelcomeModalOpen: setIsWelcomeModalOpen,
-      triviaArr: triviaArr,
+      triviaArr: triviaList,
       curQuestion: curQuestion,
-      setCurQuestion: setCurQuestion
+      setCurQuestion: setCurQuestion,
+      setTriviaArr: setTriviaArr
     }}>
       <div className="App">
         <Board />
-        <QuestionAnswerModal isOpen={curQuestion !== null} />
+        <QuestionAnswerModal isOpen={curQuestion !== null} countClicked={countClicked} setCountClicked={setCountClicked} />
+        <EndGameModal />
         <Scoreboard />
       </div>
     </AppContext.Provider>

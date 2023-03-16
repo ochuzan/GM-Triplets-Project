@@ -4,6 +4,7 @@ import QuestionCard from '../QuestionCard/QuestionCard';
 import ReactCardFlip from "react-card-flip";
 import AnswerCard from '../AnswerCard/AnswerCard';
 import { AppContext, State } from '../../App';
+import { Card } from './QuestionAnswerModal.styles';
 
 const customStyles = {
     content: {
@@ -17,30 +18,39 @@ const customStyles = {
 };
 
 
-const QuestionAnswerModal = ({ isOpen }: { isOpen: boolean }) => {
-    const [flip, setFlip] = useState(true);
+const QuestionAnswerModal = ({ isOpen, countClicked, setCountClicked }: { isOpen: boolean, countClicked: number, setCountClicked: any }) => {
+    const [flip, setFlip] = useState(false);
     const state: State = useContext(AppContext)
 
     return (
         <Modal
             isOpen={isOpen}
             onRequestClose={() => {
-                state.setCurQuestion(null)
+                const newArr = state.triviaArr.map(trivia => {
+                    if (trivia?.question === state.curQuestion?.question) {
+                        return { ...trivia, isAnswered: true }
+                    }
+                    return trivia
+                });
+                state.setTriviaArr([...newArr]);
+                state.setCurQuestion(null);
+                setCountClicked(countClicked + 1);
+                setFlip(false);
             }}
             style={customStyles}
+            ariaHideApp={false}
         >
             <ReactCardFlip isFlipped={flip} flipDirection="vertical">
-                <div>
+                <Card>
                     <QuestionCard question={state.curQuestion?.question} />
                     <button onClick={() => setFlip(!flip)}>Switch</button>
-
-                </div>
-                <div>
+                </Card>
+                <Card>
                     <AnswerCard answer={state.curQuestion?.answer} />
                     <button onClick={() => setFlip(!flip)}>Switch</button>
-                </div>
+                </Card>
             </ReactCardFlip>
-        </Modal>
+        </Modal >
     )
 }
 

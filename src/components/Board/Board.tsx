@@ -24,10 +24,12 @@ const Board = () => {
         <BoardContainer>
             <h1>Knowledge Quest</h1>
             <BoardTable>
-                {triviaList.map(trivia => (
-                    <GameCard key={trivia.question} onClick={() => {
-                        state.setCurQuestion(trivia)
-                    }}></GameCard>
+                {triviaList.map((trivia, i) => (
+                    <GameCard color={trivia.isAnswered ? 'red' : 'green'} key={trivia.question} onClick={() => {
+                        if (!trivia.isAnswered) state.setCurQuestion(trivia);
+                    }}>
+                        <h1>{i + 1}</h1>
+                    </GameCard>
                 ))}
             </BoardTable>
         </BoardContainer>
