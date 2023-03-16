@@ -1,9 +1,9 @@
 import React from 'react'
 
 
-const AnswerCard = () => {
+const AnswerCard = ({ answer }: { answer: string | undefined }) => {
     return (
-        <div>Answers</div>
+        <div>{answer}</div>
     )
 }
 
