@@ -1,18 +1,25 @@
-import { Configuration, OpenAIApi } from "openai"
-import { useEffect } from "react";
-import { fetchData } from "../utils";
+// import { Configuration, OpenAIApi } from "openai"
+// import { useContext, useEffect, useState } from "react";
+// import { fetchData } from "../utils";
+// import ReactModal from 'react-modal';
+// import { WelcomeModalWrapper } from "./WelcomeModal.styles";
 
-const WelcomeModal = () => {
 
-    useEffect( () => {
-        fetchData("Math", "7");
-    }, [])
+// const WelcomeModal = () => {
+//     ReactModal.setAppElement('#root');
+//     const welcomeModalContext = useContext(AppContext)
+
+//     useEffect( () => {
+//         // fetchData("Art History", "5");
+//     }, [])
     
-    return (
-        <div>
-            
-        </div>
-    )
-}
+//     return (
+//         <WelcomeModalWrapper>
+//           <WelcomeModal isOpen={isWelcomeModalOpen}>
+//             <button onClick={handleCloseModal}>Close</button>
+//           </WelcomeModal>
+//         </WelcomeModalWrapper>
+//     )
+// }
 
-export default WelcomeModal
+// export default WelcomeModal
