@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 // import WelcomeModal from './WelcomeModal/WelcomeModal';
 import Board from './components/Board/Board';
+import Scoreboard from './components/Scoreboard/Scoreboard';
 import { createContext, useContext } from 'react';
 import { WelcomeModalWrapper } from './WelcomeModal/WelcomeModal.styles';
 import { fetchData } from './utils';
@@ -26,9 +27,9 @@ function App() {
       <div className="App">
         <Board />
         <QuestionAnswerModal />
+        <Scoreboard />
       </div>
     </AppContext.Provider>
-
   );
 }
 
