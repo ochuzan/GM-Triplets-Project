@@ -3,28 +3,33 @@ import React, { useState } from 'react';
 import Board from './components/Board/Board';
 import Scoreboard from './components/Scoreboard/Scoreboard';
 import { createContext, useContext } from 'react';
-import { WelcomeModalWrapper } from './WelcomeModal/WelcomeModal.styles';
+import { WelcomeModalWrapper } from './components/WelcomeModal/WelcomeModal.styles';
 import { fetchData } from './utils';
 import QuestionAnswerModal from './components/QuestionAnswerModal/QuestionAnswerModal';
+import WelcomeModal from './components/WelcomeModal/WelcomeModal';
 
+export interface State {
+  isWelcomeModalOpen: boolean;
+  setIsWelcomeModalOpen: (boolean: boolean) => void;
+}
+
+export const AppContext = createContext<State>({
+  isWelcomeModalOpen: true,
+  setIsWelcomeModalOpen: (boolean: boolean) => null
+}) 
 
 function App() {
-  const [isWelcomeModalOpen, setIsWelcomeModalOpen] = useState(true); 
-  const handleCloseModal = () => setIsWelcomeModalOpen(false);
-
-  const AppContext = createContext({
-    isWelcomeModalOpen: isWelcomeModalOpen,
-    handleCloseModal: handleCloseModal
-  }) 
-
-  fetchData("Chemistry", "1");
+  const [isWelcomeModalOpen, setIsWelcomeModalOpen] = useState<boolean>(true);
+  
+  // fetchData("Chemistry", "1");
 
   return (
     <AppContext.Provider value={{
       isWelcomeModalOpen,
-      handleCloseModal,
+      setIsWelcomeModalOpen,
     }}>
       <div className="App">
+        <WelcomeModal></WelcomeModal>
         <Board />
         <QuestionAnswerModal />
         <Scoreboard />
@@ -32,7 +37,5 @@ function App() {
     </AppContext.Provider>
   );
 }
-
-
 
 export default App;
