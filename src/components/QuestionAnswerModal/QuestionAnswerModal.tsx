@@ -1,13 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Modal from 'react-modal';
 import QuestionCard from '../QuestionCard/QuestionCard';
 import ReactCardFlip from "react-card-flip";
 import AnswerCard from '../AnswerCard/AnswerCard';
-
-interface ModalProp {
-    showFront: any;
-    setShowFront: any;
-}
+import { AppContext, State } from '../../App';
 
 const customStyles = {
     content: {
@@ -21,24 +17,26 @@ const customStyles = {
 };
 
 
-const QuestionAnswerModal = () => {
+const QuestionAnswerModal = ({ isOpen }: { isOpen: boolean }) => {
     const [flip, setFlip] = useState(true);
-    const [modalIsOpen, setIsOpen] = React.useState(false);
+    const state: State = useContext(AppContext)
 
     return (
         <Modal
-            isOpen={modalIsOpen}
-            onRequestClose={() => setIsOpen(false)}
+            isOpen={isOpen}
+            onRequestClose={() => {
+                state.setCurQuestion(null)
+            }}
             style={customStyles}
         >
             <ReactCardFlip isFlipped={flip} flipDirection="vertical">
                 <div>
-                    <QuestionCard />
+                    <QuestionCard question={state.curQuestion?.question} />
                     <button onClick={() => setFlip(!flip)}>Switch</button>
 
                 </div>
                 <div>
-                    <AnswerCard />
+                    <AnswerCard answer={state.curQuestion?.answer} />
                     <button onClick={() => setFlip(!flip)}>Switch</button>
                 </div>
             </ReactCardFlip>

@@ -2,8 +2,8 @@ import { useState } from "react";
 import { PlayerScore, Player, ScoreboardContainer, ScoreButton } from "./Scoreboard.styles";
 
 const Scoreboard = () => {
-    const [ playerOneScore, setPlayerOneScore ] = useState(0);
-    const [ playerTwoScore, setPlayerTwoScore ] = useState(0);
+    const [ playerOneScore, setPlayerOneScore ] = useState<number>(0);
+    const [ playerTwoScore, setPlayerTwoScore ] = useState<number>(0);
 
     const handlePlayerOneScore = () => {
         setPlayerOneScore(playerOneScore + 1);
