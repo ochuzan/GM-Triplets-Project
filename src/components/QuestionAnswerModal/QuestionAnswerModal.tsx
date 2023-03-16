@@ -26,13 +26,13 @@ const QuestionAnswerModal = ({ isOpen, countClicked, setCountClicked }: { isOpen
         <Modal
             isOpen={isOpen}
             onRequestClose={() => {
-                const newArr = state.triviaArr.map(trivia => {
+                const newArr = state.triviaList.map(trivia => {
                     if (trivia?.question === state.curQuestion?.question) {
                         return { ...trivia, isAnswered: true }
                     }
                     return trivia
                 });
-                state.setTriviaArr([...newArr]);
+                state.setTriviaList([...newArr]);
                 state.setCurQuestion(null);
                 setCountClicked(countClicked + 1);
                 setFlip(false);

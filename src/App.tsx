@@ -12,11 +12,12 @@ import WelcomeModal from './components/WelcomeModal/WelcomeModal';
 export interface State {
   isWelcomeModalOpen: boolean;
   setIsWelcomeModalOpen: (boolean: boolean) => void;
-  triviaArr: [];
+  triviaList: TriviaObj[];
+  setTriviaList: (arr: TriviaObj[]) => void;
   curQuestion: TriviaObj | null;
-  setCurQuestion: (question: TriviaObj) => void;
-  numberOfQuestions: string;
-  setNumberOfQuestions: (num: string) => void;
+  setCurQuestion: (question: TriviaObj | null) => void;
+  numberOfQuestions: number;
+  setNumberOfQuestions: (num: number) => void;
   subject: string;
   setSubject: (subject: string) => void,
   teamOne: string;
@@ -28,11 +29,12 @@ export interface State {
 export const AppContext = createContext<State>({
   isWelcomeModalOpen: true,
   setIsWelcomeModalOpen: (boolean: boolean) => null,
-  triviaArr: [],
+  triviaList: [],
+  setTriviaList: (arr: TriviaObj[]) => null,
   curQuestion: null,
-  setCurQuestion: (question: TriviaObj) => null,
-  numberOfQuestions: "0",
-  setNumberOfQuestions: (num: string) => null,
+  setCurQuestion: () => null,
+  numberOfQuestions: 0,
+  setNumberOfQuestions: (num: number) => null,
   subject: "",
   setSubject: (subject: string) => null,
   teamOne: "",
@@ -43,29 +45,30 @@ export const AppContext = createContext<State>({
 
 function App() {
   const [isWelcomeModalOpen, setIsWelcomeModalOpen] = useState<boolean>(true);
-  const [isOpenQuestionModal, setIsOpenQuestionModal] = useState(false);
-  const [curQuestion, setCurQuestion] = useState(null);
-  const [triviaArr, setTriviaArr] = useState([]);
+  const [curQuestion, setCurQuestion] = useState<TriviaObj | null>(null);
+  const [triviaList, setTriviaList] = useState(triviaArr);
   const [numberOfQuestions, setNumberOfQuestions] = useState<number>(0);
   const [subject, setSubject] = useState<string>("");
   const [teamOne, setTeamOne] = useState<string>("");
   const [teamTwo, setTeamTwo] = useState<string>("");
-
-  
-  useEffect(() => {
-
-  }, [curQuestion])
-
-  console.log(curQuestion)
+  const [countClicked, setCountClicked] = useState<number>(0)
 
   return (
     <AppContext.Provider value={{
       isWelcomeModalOpen,
       setIsWelcomeModalOpen,
-      triviaArr: triviaArr,
-      curQuestion: curQuestion,
-      setCurQuestion: setCurQuestion,
-      setTriviaArr: setTriviaArr
+      triviaList: triviaList,
+      setTriviaList,
+      curQuestion,
+      setCurQuestion,
+      numberOfQuestions,
+      setNumberOfQuestions,
+      subject,
+      setSubject,
+      teamOne,
+      setTeamOne,
+      teamTwo,
+      setTeamTwo
     }}>
       <div className="App">
         <WelcomeModal></WelcomeModal>

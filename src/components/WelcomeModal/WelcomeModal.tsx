@@ -23,7 +23,6 @@ const WelcomeModal = () => {
         ? 
           <ReactModal isOpen={state.isWelcomeModalOpen} style={{content: {width: "50vw", height: "50vh"}, overlay: {top: "15%", left: "20%"}}}>
             <WelcomeForm/>
-            {/* <button onClick={handleCloseModal}>Close</button> */}
           </ReactModal>
         : null
         }

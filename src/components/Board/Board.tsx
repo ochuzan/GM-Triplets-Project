@@ -5,7 +5,7 @@ import { AppContext, State } from '../../App';
 
 const Board = () => {
     const state: State = useContext(AppContext)
-    const triviaList = state.triviaArr;
+    const triviaList = state.triviaList;
 
     const customStyles = {
         content: {

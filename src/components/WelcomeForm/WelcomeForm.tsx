@@ -56,6 +56,7 @@ const WelcomeForm = () => {
             <input onChange={formik.handleChange} value={formik.values.teamTwo} type="text" id="teamTwo" name="teamTwo"/>
         </label>
         <button>Start Playing?</button>
+        <button onClick={handleCloseModal}>Close</button>
       </form>
     )
 }
