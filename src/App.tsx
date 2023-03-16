@@ -4,6 +4,7 @@ import Board from './components/Board/Board';
 import { createContext, useContext } from 'react';
 import { WelcomeModalWrapper } from './WelcomeModal/WelcomeModal.styles';
 import { fetchData } from './utils';
+import QuestionAnswerModal from './components/QuestionAnswerModal/QuestionAnswerModal';
 
 
 function App() {
@@ -24,8 +25,10 @@ function App() {
     }}>
       <div className="App">
         <Board />
+        <QuestionAnswerModal />
       </div>
     </AppContext.Provider>
+
   );
 }
 
