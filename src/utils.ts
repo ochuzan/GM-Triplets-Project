@@ -8,7 +8,6 @@ export const fetchData = (subject: string, numberOfQuestions: string) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      //API KEY:
       Authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
     },
     body: JSON.stringify({

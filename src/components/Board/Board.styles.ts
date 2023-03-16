@@ -19,9 +19,12 @@ export const BoardTable = styled.div`
 
 export const GameCard = styled.div`
   margin: 15px 0px;
-  height: 50px;
   width: 30%;
   min-width: 150px;
-  background-color: black;
+  background-color: ${({ color }) => color};
   border-radius: 15px;
+
+  h1 {
+    color: white;
+  }
 `;

@@ -6,6 +6,7 @@ import AnswerCard from '../AnswerCard/AnswerCard';
 import { AppContext, State } from '../../App';
 import Scoreboard from '../Scoreboard/Scoreboard';
 import ScoreboardButtons from '../ScoreboardButtons/ScoreboardButtons';
+import { Card } from './QuestionAnswerModal.styles';
 
 const customStyles = {
     content: {
@@ -19,7 +20,7 @@ const customStyles = {
 };
 
 
-const QuestionAnswerModal = ({ isOpen }: { isOpen: boolean }) => {
+const QuestionAnswerModal = ({ isOpen, countClicked, setCountClicked }: { isOpen: boolean, countClicked: number, setCountClicked: any }) => {
     const [flip, setFlip] = useState(false);
     const state: State = useContext(AppContext)
 
@@ -27,24 +28,33 @@ const QuestionAnswerModal = ({ isOpen }: { isOpen: boolean }) => {
         <Modal
             isOpen={isOpen}
             onRequestClose={() => {
-                state.setCurQuestion(null)
+                const newArr = state.triviaList.map(trivia => {
+                    if (trivia?.question === state.curQuestion?.question) {
+                        return { ...trivia, isAnswered: true }
+                    }
+                    return trivia
+                });
+                state.setTriviaList([...newArr]);
+                state.setCurQuestion(null);
+                setCountClicked(countClicked + 1);
+                setFlip(false);
             }}
             style={customStyles}
+            ariaHideApp={false}
         >
             <ReactCardFlip isFlipped={flip} flipDirection="vertical">
-                <div>
+                <Card>
                     <QuestionCard question={state.curQuestion?.question} />
                     <button onClick={() => setFlip(!flip)}>Switch</button>
-
-                </div>
-                <div>
+                </Card>
+                <Card>
                     <AnswerCard answer={state.curQuestion?.answer} />
                     <button onClick={() => setFlip(!flip)}>Switch</button>
                     <Scoreboard/>
                     <ScoreboardButtons/>
-                </div>
+                </Card>
             </ReactCardFlip>
-        </Modal>
+        </Modal >
     )
 }
 
