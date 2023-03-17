@@ -1,24 +1,21 @@
 import * as dotenv from "dotenv";
 import { TriviaObj } from "./dummydata";
 
-export const fetchData = (subject: string, numberOfQuestions: number) => {
+export const fetchData = async (subject: string, numberOfQuestions: number) => {
   Promise<TriviaObj[]>;
-
   const result: any[] = [];
   const requestOptions = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
+      Authorization: `Bearer ${process.env.REACT_APP_AI_API_KEY}`,
     },
     body: JSON.stringify({
       model: "gpt-3.5-turbo",
       messages: [
         {
           role: "user",
-          // content: `Please give me a list of ${numberOfQuestions} ${subject} questions and their answers.`,
           content: `Please give me a question and answer about ${subject}`,
-          // content: `Please give me a list of ${numberOfQuestions} Javascript objects. Each object should contain one question and one answer about the following subject: ${subject}.`,
         },
       ],
       n: numberOfQuestions,
@@ -29,7 +26,7 @@ export const fetchData = (subject: string, numberOfQuestions: number) => {
     }),
   };
 
-  fetch("https://api.openai.com/v1/chat/completions", requestOptions)
+  return fetch("https://api.openai.com/v1/chat/completions", requestOptions)
     .then((response) => response.json())
     .then((data) => {
       const questionsAndAnswers = data.choices;
@@ -52,15 +49,12 @@ export const fetchData = (subject: string, numberOfQuestions: number) => {
           answer: answer,
           isAnswered: false,
         });
-
-        return result;
       });
-      //update state here
+      return result;
     })
     .catch((err) => {
       console.log(err);
     });
-  return result;
 };
 
 const parseQuestionAndAnswer = (str: string) => str.split("\n");
