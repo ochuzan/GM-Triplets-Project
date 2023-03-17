@@ -5,13 +5,12 @@ export const BoardContainer = styled.div`
   text-align: center;
   h1 {
     font-size: 2rem;
+    color: #4a503d;
   }
 `;
 
 export const BoardTable = styled.div`
   padding: 5% 5%;
-  border-radius: 25px;
-  background-color: aliceblue;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -27,4 +26,9 @@ export const GameCard = styled.div`
   h1 {
     color: white;
   }
+`;
+
+export const PlayerAndBoardContainer = styled.div`
+  border-radius: 25px;
+  background-color: #faf2da;
 `;

@@ -7,7 +7,6 @@ export const ScoreboardContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  background-color: aliceblue;
 `;
 
 export const Player = styled.div`
