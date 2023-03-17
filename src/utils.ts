@@ -1,9 +1,8 @@
 import * as dotenv from "dotenv";
 
-export const fetchData = (subject: string, numberOfQuestions: string) => {
+export const fetchData = (subject: string, numberOfQuestions: number) => {
   //To make fetch work we need to store the user's input ("subject" and "number of Q/A") in state and access them here
   //Note: a higher number of questions costs more, so we should limit 'numberOfQuestions' while testing
-  console.log(process.env.REACT_APP_OPENAI_API_KEY);
   const requestOptions = {
     method: "POST",
     headers: {
@@ -15,12 +14,12 @@ export const fetchData = (subject: string, numberOfQuestions: string) => {
       messages: [
         {
           role: "user",
-          content: `Please give me a list of ${parseInt(
-            numberOfQuestions
-          )} ${subject} questions and their answers.`,
+          // content: `Please give me a list of ${numberOfQuestions} ${subject} questions and their answers.`,
+          content: `Please give me a question and answer about ${subject}`,
+          // content: `Please give me a list of ${numberOfQuestions} Javascript objects. Each object should contain one question and one answer about the following subject: ${subject}.`,
         },
       ],
-      n: parseInt(numberOfQuestions),
+      n: numberOfQuestions,
       temperature: 0.5,
       top_p: 1,
       frequency_penalty: 0,
@@ -31,8 +30,17 @@ export const fetchData = (subject: string, numberOfQuestions: string) => {
   fetch("https://api.openai.com/v1/chat/completions", requestOptions)
     .then((response) => response.json())
     .then((data) => {
-      //write code to manipulate/store retrieved data here
       console.log(data);
+      const questionsAndAnswers = data.choices;
+      const result: any[] = [];
+      questionsAndAnswers.forEach((element: any) => {
+        result.push({
+          question: element.message.content,
+          // answer: ,
+          isAnswered: false,
+        });
+        return result;
+      });
     })
     .catch((err) => {
       console.log(err);
