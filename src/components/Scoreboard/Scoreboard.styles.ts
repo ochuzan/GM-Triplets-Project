@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ScoreboardContainer = styled.div`
-  margin: 0 5% 0 5%;
+  margin: 10px 5% 0 5%;
   padding: 10px 0 0 0;
   border-radius: 25px 25px 0 0;
   display: flex;

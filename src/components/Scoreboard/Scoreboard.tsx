@@ -5,23 +5,23 @@ import { PlayerScore, Player, ScoreboardContainer } from "./Scoreboard.styles";
 const Scoreboard = () => {
 
     const state: State = useContext(AppContext);
+    const { playerOneScore, teamOne, playerTwoScore, teamTwo } = state;
 
 
     return (
         <ScoreboardContainer>
             <Player>
-                Player 1
+                {teamOne}
                 <PlayerScore>
-                    {state.playerOneScore}
+                    {playerOneScore}
                 </PlayerScore>
             </Player>
             <Player>
-                Player 2
+                {teamTwo}
                 <PlayerScore>
-                    {state.playerTwoScore}
+                    {playerTwoScore}
                 </PlayerScore>
             </Player>
-            
         </ScoreboardContainer>
     )
 };
