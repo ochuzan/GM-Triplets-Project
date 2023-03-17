@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { BoardTable, BoardContainer, GameCard } from './Board.styles';
+import { BoardTable, BoardContainer, GameCard, PlayerAndBoardContainer } from './Board.styles';
 import { AppContext, State } from '../../App';
 import Scoreboard from '../Scoreboard/Scoreboard';
 
@@ -24,16 +24,18 @@ const Board = () => {
     return (
         <BoardContainer>
             <h1>Knowledge Quest</h1>
-            <Scoreboard />
-            <BoardTable>
-                {triviaList.map((trivia, i) => (
-                    <GameCard color={trivia.isAnswered ? 'red' : 'green'} key={trivia.question} onClick={() => {
-                        if (!trivia.isAnswered) state.setCurQuestion(trivia);
-                    }}>
-                        <h1>{i + 1}</h1>
-                    </GameCard>
-                ))}
-            </BoardTable>
+            <PlayerAndBoardContainer>
+                <Scoreboard />
+                <BoardTable>
+                    {triviaList.map((trivia, i) => (
+                        <GameCard color={trivia.isAnswered ? '#E28F83' : '#8E9775'} key={trivia.question} onClick={() => {
+                            if (!trivia.isAnswered) state.setCurQuestion(trivia);
+                        }}>
+                            <h1>{i + 1}</h1>
+                        </GameCard>
+                    ))}
+                </BoardTable>
+            </PlayerAndBoardContainer>
         </BoardContainer>
     )
 }
