@@ -8,21 +8,21 @@ export const ScoreboardButtons = ( { countClicked } : { countClicked: number }) 
     const {playerOneScore, setPlayerOneScore, playerTwoScore, setPlayerTwoScore } = state;
 
     const handlePlayerOneScore = () => {
-        if (playerOneScore == countClicked) {
+        if (playerOneScore <= countClicked) {
             setPlayerOneScore(playerOneScore + 1);
         }
     }
     
     const handlePlayerTwoScore = () => {
-        if (playerTwoScore == countClicked) {
+        if (playerTwoScore <= countClicked) {
             setPlayerTwoScore(playerTwoScore + 1);
         }
     }
 
     return (
         <ScoreButtonContainer>
-            <ScoreButton onClick={handlePlayerOneScore}>+</ScoreButton>
-            <ScoreButton onClick={handlePlayerTwoScore}>+</ScoreButton>
+            <ScoreButton className="playerOneButton" onClick={handlePlayerOneScore}>+</ScoreButton>
+            <ScoreButton className="playerTwoButton" onClick={handlePlayerTwoScore}>+</ScoreButton>
         </ScoreButtonContainer>
     )
 }
