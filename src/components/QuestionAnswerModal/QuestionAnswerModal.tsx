@@ -51,7 +51,7 @@ const QuestionAnswerModal = ({ isOpen, countClicked, setCountClicked }: { isOpen
                     <AnswerCard answer={state.curQuestion?.answer} />
                     <button onClick={() => setFlip(!flip)}>Switch</button>
                     <Scoreboard/>
-                    <ScoreboardButtons/>
+                    <ScoreboardButtons countClicked={countClicked}/>
                 </Card>
             </ReactCardFlip>
         </Modal >
