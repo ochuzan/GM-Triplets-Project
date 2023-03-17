@@ -5,16 +5,11 @@ import ReactModal from 'react-modal';
 import { State } from "../../App";
 import { AppContext } from "../../App";
 import WelcomeForm from "../WelcomeForm/WelcomeForm";
-
+import { FormWrapper } from "../WelcomeForm/WelcomeForm.styles";
 
 const WelcomeModal = () => {
     ReactModal.setAppElement('#root');
     const state: State = useContext(AppContext);
-
-
-    useEffect( () => {
-        // fetchData("Art History", "5");
-    }, [])
     
     return (
       <div>
@@ -22,7 +17,7 @@ const WelcomeModal = () => {
         state.isWelcomeModalOpen
         ? 
           <ReactModal isOpen={state.isWelcomeModalOpen} style={{content: {width: "50vw", height: "50vh"}, overlay: {top: "15%", left: "20%"}}}>
-            <WelcomeForm/>
+              <WelcomeForm/>
           </ReactModal>
         : null
         }

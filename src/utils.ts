@@ -1,8 +1,10 @@
 import * as dotenv from "dotenv";
+import { TriviaObj } from "./dummydata";
 
 export const fetchData = (subject: string, numberOfQuestions: number) => {
-  //To make fetch work we need to store the user's input ("subject" and "number of Q/A") in state and access them here
-  //Note: a higher number of questions costs more, so we should limit 'numberOfQuestions' while testing
+  Promise<TriviaObj[]>;
+
+  const result: any[] = [];
   const requestOptions = {
     method: "POST",
     headers: {
@@ -30,19 +32,35 @@ export const fetchData = (subject: string, numberOfQuestions: number) => {
   fetch("https://api.openai.com/v1/chat/completions", requestOptions)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       const questionsAndAnswers = data.choices;
-      const result: any[] = [];
+
       questionsAndAnswers.forEach((element: any) => {
+        const parsedQandA = parseQuestionAndAnswer(element.message.content);
+        let answer;
+        let question;
+
+        parsedQandA.forEach((element) => {
+          if (element[0] === "A") {
+            answer = element;
+          } else if (element[0] === "Q") {
+            question = element;
+          }
+        });
+
         result.push({
-          question: element.message.content,
-          // answer: ,
+          question: question,
+          answer: answer,
           isAnswered: false,
         });
+
         return result;
       });
+      //update state here
     })
     .catch((err) => {
       console.log(err);
     });
+  return result;
 };
+
+const parseQuestionAndAnswer = (str: string) => str.split("\n");

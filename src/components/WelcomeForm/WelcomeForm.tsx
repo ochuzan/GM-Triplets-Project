@@ -5,6 +5,9 @@ import { AppContext } from "../../App";
 import { State } from "../../App";
 import {useFormik,} from "formik"
 import * as Yup from 'yup';
+import { TriviaObj } from "../../dummydata";
+import { LabelWrapper, FormWrapper, Button } from "./WelcomeForm.styles";
+import {  } from "./WelcomeForm.styles";
 
 
 const WelcomeForm = () => {
@@ -29,7 +32,7 @@ const WelcomeForm = () => {
 
     const formik = useFormik({
         initialValues: {
-        subject: '',
+        subject: 'biology',
         numberOfQuestions: 0,
         teamOne: '',
         teamTwo: '',
@@ -40,24 +43,19 @@ const WelcomeForm = () => {
             state.setTeamOne(values.teamOne);
             state.setTeamTwo(values.teamTwo);
 
-            console.log(state);
-            console.log(formik);
+            console.log('hi')
+            const questionsAndAnswers: TriviaObj[] = fetchData(formik.values.subject, formik.values.numberOfQuestions);
+            console.log(questionsAndAnswers);
+            state.setTriviaList(questionsAndAnswers);
+            console.log(state.triviaList)
 
-            fetchData(formik.values.subject, formik.values.numberOfQuestions);
-            // fetchAndStoreData(formik.values.subject, formik.values.numberOfQuestions)
             handleCloseModal();
         }
     })
-
-    // const fetchAndStoreData = async (subject: string, numberOfQuestions: number) => {
-    //     const rawData = await fetchData<Promise>(subject, numberOfQuestions);
-    //     const data = await rawData.json();
-
-    // }
     
     return (
-      <form onSubmit={formik.handleSubmit}>
-        <label htmlFor="subject">
+      <FormWrapper onSubmit={formik.handleSubmit}>
+        <LabelWrapper htmlFor="subject">
             Subject:
             <select name="subject" id="subject" onChange={formik.handleChange} value={formik.values.subject}>
                 <option value="biology">Biology</option>
@@ -67,22 +65,25 @@ const WelcomeForm = () => {
                 <option value="american history">American History</option>
                 <option value="world history">World History</option>
             </select>
-        </label>
-        <label htmlFor="numberOfQuestions">
+        </LabelWrapper>
+        <LabelWrapper>
+        <LabelWrapper htmlFor="numberOfQuestions">
             Number of Questions:
             <input onChange={formik.handleChange} value={formik.values.numberOfQuestions} type="number" id="numberOfQuestions" name="numberOfQuestions" />
-        </label>
-        <label htmlFor="teamOne">
+        </LabelWrapper>
+        </LabelWrapper>
+        <LabelWrapper>
+        <LabelWrapper htmlFor="teamOne">
             Team One's Name:
             <input onChange={formik.handleChange} value={formik.values.teamOne} type="text" id="teamOne" name="teamOne"/>
-        </label>
-        <label htmlFor="teamTwo">
+        </LabelWrapper>
+        </LabelWrapper>
+        <LabelWrapper htmlFor="teamTwo">
             Team Two's Name:
             <input onChange={formik.handleChange} value={formik.values.teamTwo} type="text" id="teamTwo" name="teamTwo"/>
-        </label>
-        <button>Start Playing?</button>
-        {/* <button onClick={handleCloseModal}>Close</button> */}
-      </form>
+        </LabelWrapper>
+        <Button>Start Playing?</Button>
+      </FormWrapper>
     )
 }
 
