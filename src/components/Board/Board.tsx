@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { BoardTable, BoardContainer, GameCard } from './Board.styles';
 import { AppContext, State } from '../../App';
+import Scoreboard from '../Scoreboard/Scoreboard';
 
 
 const Board = () => {
@@ -23,6 +24,7 @@ const Board = () => {
     return (
         <BoardContainer>
             <h1>Knowledge Quest</h1>
+            <Scoreboard />
             <BoardTable>
                 {triviaList.map((trivia, i) => (
                     <GameCard color={trivia.isAnswered ? 'red' : 'green'} key={trivia.question} onClick={() => {

@@ -1,29 +1,29 @@
 import { useContext } from "react";
 import { AppContext, State } from "../../App";
-import { ScoreButton } from "./ScoreboardButtons.styles";
+import { ScoreButton, ScoreButtonContainer } from "./ScoreboardButtons.styles";
 
-export const ScoreboardButtons = () => {
+export const ScoreboardButtons = ( { countClicked } : { countClicked: number }) => {
 
     const state: State = useContext(AppContext);
-    const {playerOneScore, setPlayerOneScore, playerTwoScore, setPlayerTwoScore} = state;
+    const {playerOneScore, setPlayerOneScore, playerTwoScore, setPlayerTwoScore } = state;
 
     const handlePlayerOneScore = () => {
-        setPlayerOneScore(playerOneScore + 1);
-        console.log(state)
-        console.log(playerOneScore)
-        console.log(playerOneScore + 1)
+        if (playerOneScore == countClicked) {
+            setPlayerOneScore(playerOneScore + 1);
+        }
     }
     
     const handlePlayerTwoScore = () => {
-        setPlayerTwoScore(playerTwoScore + 1);
-        console.log(playerTwoScore + 1)
+        if (playerTwoScore == countClicked) {
+            setPlayerTwoScore(playerTwoScore + 1);
+        }
     }
 
     return (
-        <div>
+        <ScoreButtonContainer>
             <ScoreButton onClick={handlePlayerOneScore}>+</ScoreButton>
             <ScoreButton onClick={handlePlayerTwoScore}>+</ScoreButton>
-        </div>
+        </ScoreButtonContainer>
     )
 }
 

@@ -89,7 +89,6 @@ function App() {
         <Board />
         <QuestionAnswerModal isOpen={curQuestion !== null} countClicked={countClicked} setCountClicked={setCountClicked} />
         <EndGameModal />
-        <Scoreboard />
       </div>
     </AppContext.Provider>
   );
