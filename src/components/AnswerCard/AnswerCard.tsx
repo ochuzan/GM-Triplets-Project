@@ -1,9 +1,14 @@
 import React from 'react'
+import { AnswerContent } from './AnswerCard.styles';
 
 
 const AnswerCard = ({ answer }: { answer: string | undefined }) => {
     return (
-        <div>{answer}</div>
+        <AnswerContent>
+            <h3>
+                {answer}
+            </h3>
+        </AnswerContent>
     )
 }
 

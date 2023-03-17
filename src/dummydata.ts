@@ -3,6 +3,7 @@ export interface TriviaObj {
   answer: string;
   isAnswered: boolean;
 }
+
 export const triviaArr: TriviaObj[] = [
   {
     question: "What is the atomic number of carbon?",

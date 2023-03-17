@@ -6,7 +6,7 @@ import AnswerCard from '../AnswerCard/AnswerCard';
 import { AppContext, State } from '../../App';
 import Scoreboard from '../Scoreboard/Scoreboard';
 import ScoreboardButtons from '../ScoreboardButtons/ScoreboardButtons';
-import { Card } from './QuestionAnswerModal.styles';
+import { Button, Card } from './QuestionAnswerModal.styles';
 
 const customStyles = {
     content: {
@@ -22,6 +22,7 @@ const customStyles = {
         fontSize: '2em',
         fontWeight: '600',
         paddingTop: '100px'
+        background: "#FAF2DA"
     },
 };
 
@@ -51,13 +52,13 @@ const QuestionAnswerModal = ({ isOpen, countClicked, setCountClicked }: { isOpen
             <ReactCardFlip isFlipped={flip} flipDirection="vertical">
                 <Card>
                     <QuestionCard question={state.curQuestion?.question} />
-                    <button onClick={() => setFlip(!flip)}>Switch</button>
+                    <Button onClick={() => setFlip(!flip)}>Flip for answer</Button>
                 </Card>
                 <Card>
                     <AnswerCard answer={state.curQuestion?.answer} />
-                    <button onClick={() => setFlip(!flip)}>Switch</button>
-                    <Scoreboard/>
-                    <ScoreboardButtons countClicked={countClicked}/>
+                    <Button onClick={() => setFlip(!flip)}>Flip for question</Button>
+                    <Scoreboard />
+                    <ScoreboardButtons countClicked={countClicked} />
                 </Card>
             </ReactCardFlip>
         </Modal >

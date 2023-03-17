@@ -1,10 +1,13 @@
 import React from 'react'
+import { QuestionContent } from './QuestionCard.styles';
 
 const QuestionCard = ({ question }: { question: string | undefined }) => {
     return (
-        <div>
-            {question}
-        </div>
+        <QuestionContent>
+            <h3>
+                {question}
+            </h3>
+        </QuestionContent>
     )
 }
 
