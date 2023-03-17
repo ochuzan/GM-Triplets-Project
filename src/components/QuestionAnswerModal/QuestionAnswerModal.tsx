@@ -26,7 +26,7 @@ const QuestionAnswerModal = ({ isOpen, countClicked, setCountClicked }: { isOpen
         <Modal
             isOpen={isOpen}
             onRequestClose={() => {
-                const newArr = state.triviaArr.map(trivia => {
+                const newArr = state.triviaList.map(trivia => {
                     if (trivia?.question === state.curQuestion?.question) {
                         return { ...trivia, isAnswered: true }
                     }
