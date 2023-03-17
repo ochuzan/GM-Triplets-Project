@@ -27,7 +27,7 @@ export interface State {
   playerOneScore: number;
   setPlayerOneScore: (playerOneScore: number) => void,
   playerTwoScore: number;
-  setPlayerTwoScore:(playerTwoScore: number) => void,
+  setPlayerTwoScore: (playerTwoScore: number) => void,
 }
 
 export const AppContext = createContext<State>({
@@ -48,26 +48,26 @@ export const AppContext = createContext<State>({
   playerOneScore: 0,
   setPlayerOneScore: (playerOneScore) => null,
   playerTwoScore: 0,
-  setPlayerTwoScore:(playerTwoScore) => null,
+  setPlayerTwoScore: (playerTwoScore) => null,
 })
 
 function App() {
   const [isWelcomeModalOpen, setIsWelcomeModalOpen] = useState<boolean>(true);
   const [curQuestion, setCurQuestion] = useState<TriviaObj | null>(null);
-  const [triviaList, setTriviaList] = useState(triviaArr);
+  const [triviaList, setTriviaList] = useState<TriviaObj[]>([]);
   const [numberOfQuestions, setNumberOfQuestions] = useState<number>(0);
   const [subject, setSubject] = useState<string>("");
   const [teamOne, setTeamOne] = useState<string>("");
   const [teamTwo, setTeamTwo] = useState<string>("");
   const [countClicked, setCountClicked] = useState<number>(0)
-  const [ playerOneScore, setPlayerOneScore ] = useState<number>(0);
-  const [ playerTwoScore, setPlayerTwoScore ] = useState<number>(0);
+  const [playerOneScore, setPlayerOneScore] = useState<number>(0);
+  const [playerTwoScore, setPlayerTwoScore] = useState<number>(0);
 
   return (
     <AppContext.Provider value={{
       isWelcomeModalOpen,
       setIsWelcomeModalOpen,
-      triviaList: triviaList,
+      triviaList,
       setTriviaList,
       curQuestion,
       setCurQuestion,

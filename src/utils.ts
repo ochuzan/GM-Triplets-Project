@@ -19,9 +19,9 @@ export const fetchData = async (subject: string, numberOfQuestions: number) => {
         },
       ],
       n: numberOfQuestions,
-      temperature: 0.5,
+      temperature: 1.25,
       top_p: 1,
-      frequency_penalty: 0,
+      frequency_penalty: 0.5,
       presence_penalty: 0.5,
     }),
   };
@@ -29,7 +29,7 @@ export const fetchData = async (subject: string, numberOfQuestions: number) => {
   return fetch("https://api.openai.com/v1/chat/completions", requestOptions)
     .then((response) => response.json())
     .then((data) => {
-      const questionsAndAnswers = data.choices;
+      const questionsAndAnswers = data.choices || [];
 
       questionsAndAnswers.forEach((element: any) => {
         const parsedQandA = parseQuestionAndAnswer(element.message.content);

@@ -1,14 +1,13 @@
-import { Configuration, OpenAIApi } from "openai"
-import { useContext, useEffect, useState } from "react";
+// import { Configuration, OpenAIApi } from "openai"
+import { useContext } from "react";
 import { fetchData } from "../../utils";
 import { AppContext } from "../../App";
 import { State } from "../../App";
-import { useFormik, } from "formik"
+import { useFormik } from "formik"
 import * as Yup from 'yup';
-import { TriviaObj } from "../../dummydata";
-import { LabelWrapper, FormWrapper, Button } from "./WelcomeForm.styles";
-import { } from "./WelcomeForm.styles";
-
+// import { TriviaObj } from "../../dummydata";
+import { LabelWrapper, FormWrapper, Button, Error } from "./WelcomeForm.styles";
+// import {  } from './WelcomeForm.styles'
 
 const WelcomeForm = () => {
     const state: State = useContext(AppContext);
@@ -22,6 +21,7 @@ const WelcomeForm = () => {
         state.setTeamTwo(values.teamTwo);
 
         const questionsAndAnswers: any = await fetchData(formik.values.subject, formik.values.numberOfQuestions);
+        console.log(questionsAndAnswers)
         state.setTriviaList(questionsAndAnswers);
 
         handleCloseModal();
@@ -48,7 +48,7 @@ const WelcomeForm = () => {
             numberOfQuestions: 0,
             teamOne: '',
             teamTwo: '',
-        },
+        }, validationSchema: WelcomeFormSchema,
         onSubmit: (values) => handleSubmit(values)
     })
 
@@ -69,19 +69,29 @@ const WelcomeForm = () => {
                 <LabelWrapper htmlFor="numberOfQuestions">
                     Number of Questions:
                     <input onChange={formik.handleChange} value={formik.values.numberOfQuestions} type="number" id="numberOfQuestions" name="numberOfQuestions" />
+
+                    {formik.errors.numberOfQuestions &&
+                        <Error>{formik.errors.numberOfQuestions}</Error>
+                    }
                 </LabelWrapper>
             </LabelWrapper>
             <LabelWrapper>
                 <LabelWrapper htmlFor="teamOne">
                     Team One's Name:
                     <input onChange={formik.handleChange} value={formik.values.teamOne} type="text" id="teamOne" name="teamOne" />
+                    {formik.errors.teamOne &&
+                        <Error>{formik.errors.teamOne}</Error>
+                    }
                 </LabelWrapper>
             </LabelWrapper>
             <LabelWrapper htmlFor="teamTwo">
                 Team Two's Name:
                 <input onChange={formik.handleChange} value={formik.values.teamTwo} type="text" id="teamTwo" name="teamTwo" />
+                {formik.errors.teamTwo &&
+                    <Error>{formik.errors.teamTwo}</Error>
+                }
             </LabelWrapper>
-            <Button>Start Playing?</Button>
+            <Button type="submit">Start Playing</Button>
         </FormWrapper>
     )
 }

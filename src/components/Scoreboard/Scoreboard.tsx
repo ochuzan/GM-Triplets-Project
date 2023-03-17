@@ -11,13 +11,13 @@ const Scoreboard = () => {
     return (
         <ScoreboardContainer>
             <Player>
-                {teamOne}
+                Team: {teamOne}
                 <PlayerScore>
                     {playerOneScore}
                 </PlayerScore>
             </Player>
             <Player>
-                {teamTwo}
+                Team: {teamTwo}
                 <PlayerScore>
                     {playerTwoScore}
                 </PlayerScore>

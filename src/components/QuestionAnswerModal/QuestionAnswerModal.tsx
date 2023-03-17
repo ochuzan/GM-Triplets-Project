@@ -17,11 +17,10 @@ const customStyles = {
         marginRight: '-50%',
         transform: 'translate(-50%, -50%)',
         width: '700px',
-        height: '450px',
+        // height: '450px',
         padding: '20px',
         fontSize: '2em',
         fontWeight: '600',
-        paddingTop: '100px'
         background: "#FAF2DA"
     },
 };

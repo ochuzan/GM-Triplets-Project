@@ -27,13 +27,13 @@ const Board = () => {
             <PlayerAndBoardContainer>
                 <Scoreboard />
                 <BoardTable>
-                    {triviaList.map((trivia, i) => (
+                    {triviaList.length ? triviaList.map((trivia, i) => (
                         <GameCard color={trivia.isAnswered ? '#E28F83' : '#8E9775'} key={trivia.question} onClick={() => {
                             if (!trivia.isAnswered) state.setCurQuestion(trivia);
                         }}>
                             <h1>{i + 1}</h1>
                         </GameCard>
-                    ))}
+                    )) : null}
                 </BoardTable>
             </PlayerAndBoardContainer>
         </BoardContainer>

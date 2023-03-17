@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+export const Error = styled.p`
+  color: red;
+  font-weight: normal !important;
+  /* margin: -20px 0 20px; */
+  margin: 0;
+`;
+
 export const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
@@ -15,6 +22,7 @@ export const LabelWrapper = styled.label`
   margin: 3% 0;
   font-weight: bold;
   text-align: left;
+
 `;
 
 export const Button = styled.button`
@@ -24,3 +32,4 @@ export const Button = styled.button`
   height: 40px;
   text-transform: uppercase;
 `;
+
