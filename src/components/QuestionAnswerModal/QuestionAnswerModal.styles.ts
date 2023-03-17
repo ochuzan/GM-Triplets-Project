@@ -10,6 +10,7 @@ export const ModalContent = styled.div`
 
 export const Card = styled.div`
   text-align: center;
+  padding: 40px 15px;
 `;
 
 export const Button = styled.button`

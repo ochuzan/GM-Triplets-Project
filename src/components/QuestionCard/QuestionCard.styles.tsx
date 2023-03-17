@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const QuestionContent = styled.div`
  h3 {
-    padding: 15px;
+    padding-bottom: 30px;
+    margin: 0;
+    font-size: 25px;
  }
 `
