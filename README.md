@@ -17,9 +17,12 @@ Knowledge Quest is an app that helps users study subject or topics by creating a
 
 - React
 - Typescript
+- ChatGPT API
 - React Modal
+- React Card Flip
 - React useContext
 - Formik
+- Yup
 
 ## Available Scripts
 
