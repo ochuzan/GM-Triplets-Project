@@ -91,6 +91,7 @@ const WelcomeForm = () => {
                     <Error>{formik.errors.teamTwo}</Error>
                 }
             </LabelWrapper>
+            <p>You have 6 seconds to answer each question</p>
             <Button type="submit">Start Playing</Button>
         </FormWrapper>
     )

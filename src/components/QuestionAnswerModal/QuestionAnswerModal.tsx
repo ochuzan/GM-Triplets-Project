@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect, useRef } from 'react'
 import Modal from 'react-modal';
 import QuestionCard from '../QuestionCard/QuestionCard';
 import ReactCardFlip from "react-card-flip";
@@ -27,13 +27,37 @@ const customStyles = {
 
 
 const QuestionAnswerModal = ({ isOpen, countClicked, setCountClicked }: { isOpen: boolean, countClicked: number, setCountClicked: any }) => {
+    const state: State = useContext(AppContext);
     const [flip, setFlip] = useState(false);
-    const state: State = useContext(AppContext)
+    const [seconds, setSeconds] = useState(6);
+    let intervalRef = useRef<NodeJS.Timer>();
+    let secondsRef = useRef<number>(6);
+
+    const handleOpen = () => {
+        intervalRef.current = setInterval(() => {
+            if (secondsRef.current > 0) {
+                secondsRef.current = secondsRef.current - 1;
+                setSeconds(secondsRef.current);
+                console.log(secondsRef)
+            } else {
+                clearInterval(intervalRef.current)
+            }
+        }, 1000);
+    };
+
+    const handleClick = () => {
+        setFlip(!flip);
+        clearInterval(intervalRef.current);
+    }
 
     return (
         <Modal
             isOpen={isOpen}
+            onAfterOpen={handleOpen}
             onRequestClose={() => {
+                clearInterval(intervalRef.current);
+                secondsRef.current = 6;
+                setSeconds(6);
                 const newArr = state.triviaList.map(trivia => {
                     if (trivia?.question === state.curQuestion?.question) {
                         return { ...trivia, isAnswered: true }
@@ -51,13 +75,14 @@ const QuestionAnswerModal = ({ isOpen, countClicked, setCountClicked }: { isOpen
             <ReactCardFlip isFlipped={flip} flipDirection="vertical">
                 <Card>
                     <QuestionCard question={state.curQuestion?.question} />
-                    <Button onClick={() => setFlip(!flip)}>Flip for answer</Button>
+                    <Button onClick={handleClick}>Flip for answer</Button>
+                    <p>{seconds}</p>
                 </Card>
                 <Card>
                     <AnswerCard answer={state.curQuestion?.answer} />
                     <Button onClick={() => setFlip(!flip)}>Flip for question</Button>
                     <Scoreboard />
-                    <ScoreboardButtons countClicked={countClicked} />
+                    {secondsRef.current ? <ScoreboardButtons countClicked={countClicked} /> : null}
                 </Card>
             </ReactCardFlip>
         </Modal >
