@@ -5,9 +5,8 @@ import { AppContext } from "../../App";
 import { State } from "../../App";
 import { useFormik } from "formik"
 import * as Yup from 'yup';
-// import { TriviaObj } from "../../dummydata";
 import { LabelWrapper, FormWrapper, Button, Error } from "./WelcomeForm.styles";
-// import {  } from './WelcomeForm.styles'
+import { LoginButton } from "../buttons/login-button";
 
 const WelcomeForm = () => {
     const state: State = useContext(AppContext);
@@ -53,6 +52,8 @@ const WelcomeForm = () => {
     })
 
     return (
+        <div>
+            <LoginButton></LoginButton>
         <FormWrapper onSubmit={formik.handleSubmit}>
             <LabelWrapper htmlFor="subject">
                 Subject:
@@ -93,6 +94,7 @@ const WelcomeForm = () => {
             </LabelWrapper>
             <Button type="submit">Start Playing</Button>
         </FormWrapper>
+        </div>
     )
 }
 

@@ -9,6 +9,8 @@ import { TriviaObj, triviaArr } from './dummydata';
 import EndGameModal from './components/EndGameModal/EndGameModal';
 import WelcomeModal from './components/WelcomeModal/WelcomeModal';
 
+
+
 export interface State {
   isWelcomeModalOpen: boolean;
   setIsWelcomeModalOpen: (boolean: boolean) => void;
@@ -17,7 +19,7 @@ export interface State {
   curQuestion: TriviaObj | null;
   setCurQuestion: (question: TriviaObj | null) => void;
   numberOfQuestions: number;
-  setNumberOfQuestions: (num: number) => void;
+  setNumberOfQuestions: (num: number) => void;   
   subject: string;
   setSubject: (subject: string) => void,
   teamOne: string;
@@ -51,6 +53,7 @@ export const AppContext = createContext<State>({
   setPlayerTwoScore: (playerTwoScore) => null,
 })
 
+
 function App() {
   const [isWelcomeModalOpen, setIsWelcomeModalOpen] = useState<boolean>(true);
   const [curQuestion, setCurQuestion] = useState<TriviaObj | null>(null);
@@ -64,33 +67,33 @@ function App() {
   const [playerTwoScore, setPlayerTwoScore] = useState<number>(0);
 
   return (
-    <AppContext.Provider value={{
-      isWelcomeModalOpen,
-      setIsWelcomeModalOpen,
-      triviaList,
-      setTriviaList,
-      curQuestion,
-      setCurQuestion,
-      numberOfQuestions,
-      setNumberOfQuestions,
-      subject,
-      setSubject,
-      teamOne,
-      setTeamOne,
-      teamTwo,
-      setTeamTwo,
-      playerOneScore: playerOneScore,
-      setPlayerOneScore: setPlayerOneScore,
-      playerTwoScore: playerTwoScore,
-      setPlayerTwoScore: setPlayerTwoScore,
-    }}>
-      <div className="App">
-        <WelcomeModal></WelcomeModal>
-        <Board />
-        <QuestionAnswerModal isOpen={curQuestion !== null} countClicked={countClicked} setCountClicked={setCountClicked} />
-        <EndGameModal />
-      </div>
-    </AppContext.Provider>
+      <AppContext.Provider value={{
+        isWelcomeModalOpen,
+        setIsWelcomeModalOpen,
+        triviaList,
+        setTriviaList,
+        curQuestion,
+        setCurQuestion,
+        numberOfQuestions,
+        setNumberOfQuestions,
+        subject,
+        setSubject,
+        teamOne,
+        setTeamOne,
+        teamTwo,
+        setTeamTwo,
+        playerOneScore: playerOneScore,
+        setPlayerOneScore: setPlayerOneScore,
+        playerTwoScore: playerTwoScore,
+        setPlayerTwoScore: setPlayerTwoScore,
+      }}>
+        <div className="App">
+          <WelcomeModal></WelcomeModal>
+          <Board />
+          <QuestionAnswerModal isOpen={curQuestion !== null} countClicked={countClicked} setCountClicked={setCountClicked} />
+          <EndGameModal />
+        </div>
+      </AppContext.Provider>
   );
 }
 
